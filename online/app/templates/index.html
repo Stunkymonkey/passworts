@@ -1,0 +1,23 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome to the Password-Generator</h1>
+<br>
+<form action="" method="POST" name="request">
+	{{form.hidden_tag()}}
+	{{form.pw_length(placeholder="lenght")}}
+	{{form.pw_count(placeholder="count")}}
+	<br>
+	<br>
+	<p><input type="submit" value="Generieren" size=50px></p>
+	{% for error in form.errors.pw_lenght %}
+		<span style="color: red;">[{{error}}]</span>
+	{% endfor %}<br>
+	{% for error in form.errors.pw_coount %}
+		<span style="color: red;">[{{error}}]</span>
+	{% endfor %}<br>
+</form>
+
+{% endblock %}

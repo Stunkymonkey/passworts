@@ -1,0 +1,34 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Result:</h1>
+<br>
+<h2>
+  {% if requested %}
+    {{requested}}
+  {% endif %}
+</h2>
+<h3>
+  <ul class=result>
+    {% for password in password_ready %}
+      <li>{{ password }}</li>
+    {% else %}
+      <li><em>Sorry. It was to hard to generate the Passwords.</em></li>
+    {% endfor %}
+  </ul>
+</h3>
+<!-- for future flashes, if needed -->
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <h5>
+      <ul class=flashes>
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+     </ul>
+    </h5>
+  {% endif %}
+{% endwith %}
+
+{% endblock %}
