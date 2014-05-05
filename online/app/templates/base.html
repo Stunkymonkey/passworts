@@ -16,11 +16,21 @@
   <body>
 
   <div class="header">
-    <h1><a href="/"><i class="fa fa-unlock-alt"></i></a></h1>
+    <h1><a href="/"><i class="fa fa-unlock-alt" id="icon" onmouseover="change()" onmouseout="rechange()"></i></a></h1>
     <h1><a href="/">Passworts</a></h1>
     <h2>Smart passwords, easy to keep in mind</h2>
   </div>
 
+  <script type="text/javascript">
+  function change() {
+    var icon = document.getElementById("icon");
+    icon.className="fa fa-lock";
+  }
+  function rechange() {
+    var icon = document.getElementById("icon");
+    icon.className="fa fa-unlock-alt";
+  }
+  </script>
     {% block content %}
     {% endblock %}
 
