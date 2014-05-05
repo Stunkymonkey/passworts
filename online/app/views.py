@@ -28,14 +28,14 @@ def home():
 		if int(form.pw_length.data) <=4:
 			flash("It is not possible to create a password unter 5 letters!")
 			wrong_input = True
-		if int(form.pw_length.data) >20:
-			flash("It is not possible to create a password over 20 letters!")
+		if int(form.pw_length.data) >16:
+			flash("It is not possible to create a password over 16 letters!")
 			wrong_input = True
 		if int(form.pw_count.data) <=0:
 			flash("It is not possible to create no passwords!")
 			wrong_input = True
-		if int(form.pw_count.data) >100:
-			flash("It is not possible to create more than 100 passwords!")
+		if int(form.pw_count.data) >50:
+			flash("It is not possible to create more than 50 passwords!")
 			wrong_input = True
 		if wrong_input == True:
 			return redirect('/')

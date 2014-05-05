@@ -8,8 +8,8 @@
 <form action="" method="POST" name="request">
 	{{form.hidden_tag()}}
 	<ul class="centeredList">
-	<li>{{form.pw_length(placeholder="Length")}}</li>
-	<li>{{form.pw_count(placeholder="Count of passwords")}}</li>
+	<li>{{form.pw_length(placeholder="Length (max:16)")}}</li>
+	<li>{{form.pw_count(placeholder="Count of passwords (max:50)")}}</li>
 	</ul>
 
 	<ul class="centeredList submit">
