@@ -1,5 +1,4 @@
-from flask import render_template, flash, redirect, request 
-import sys
+from flask import render_template, flash, redirect, request
 from app import app
 from app.forms import Input
 from app import generator
