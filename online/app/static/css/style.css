@@ -62,6 +62,10 @@ a {
     padding-top: 30px;
 
 }
+.content img {
+    display: block;
+    margin: 0px auto;  
+}
 
 /*---------------Index--------------*/
 
@@ -127,11 +131,11 @@ input[type="submit"]:active {
     font-size: .7em 
     font-weight:800;
     text-align: center;
-    line-height: 100%
+    line-height: 180%
 
 }
 .footer p{
-    margin:10px 0px;
+    margin:0px 0px;
 }
 .footer a {
     text-decoration: underline;
