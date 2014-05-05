@@ -8,8 +8,8 @@
 <form action="" method="POST" name="request">
 	{{form.hidden_tag()}}
 	<ul class="centeredList">
-	<li>{{form.pw_length(placeholder="Length")}}</li>
-	<li>{{form.pw_count(placeholder="Count of passwords")}}</li>
+	<li>{{form.pw_length(placeholder="Length (max:16)")}}</li>
+	<li>{{form.pw_count(placeholder="Count of passwords (max:50)")}}</li>
 	</ul>
 
 	<ul class="centeredList submit">
@@ -34,6 +34,6 @@
   <div class="footer">
     <hr>
     <p>Passworts is a project by <a href="http://github.com/Stunkymonkey/">Stunkymonkey</a> and <a href="http://cookingrobot.de">CookingRobot</a></p>
-    <p>Its written in Python using <a href="http://flask.pocoo.org/">Flask</a>. Available at <a href="http://github.com/Stunkymonkey/pw-generator">Github</a></p>
+    <p>Its written in Python using <a href="http://flask.pocoo.org/">Flask</a>. Available at <a href="http://github.com/Stunkymonkey/passworts">Github</a></p>
   </div>
 {% endblock %}
