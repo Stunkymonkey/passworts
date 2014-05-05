@@ -22,10 +22,10 @@
 	<input type="submit" value="Generate" size=50px>
 	</ul>
 
-	{% for error in form.errors.pw_lenght %}
+	{% for error in form.errors.pw_length %}
 		<span style="color: red;">[{{error}}]</span>
 	{% endfor %}<br>
-	{% for error in form.errors.pw_coount %}
+	{% for error in form.errors.pw_count %}
 		<span style="color: red;">[{{error}}]</span>
 	{% endfor %}<br>
 
