@@ -9,6 +9,30 @@ body {
     font-family: "Raleway","Helvetiva Neue","Arial";
 }
 
+.backLink {
+    background-color: #0A0E14;
+    color:#FAFAFA;
+    font-family: "Raleway","Helvetiva Neue","Arial";
+    opacity: .85;
+    padding: 7px 10px;
+    border-radius: 3px; 
+
+    position: absolute;
+    top:20px;
+    left:20px;
+
+}
+.backLink i{
+    margin-right: 5px;
+}
+
+/*---------------MAIN--------------*/
+
+a {
+    text-decoration:none;
+    color: #0A0E14;
+}
+
 .header {
     width: 50%;
     margin: 0px auto;
@@ -30,6 +54,7 @@ body {
     font-weight: 400;
     font-size: 1.2em;
 }
+
 .content {
     width: 50%;
     margin: 0px auto;
@@ -37,6 +62,10 @@ body {
     padding-top: 30px;
 
 }
+
+/*---------------Index--------------*/
+
+
 
 input {
     width: 200px;
@@ -73,7 +102,6 @@ input[type="submit"]:active {
 
 } 
 
-
 .centeredList
  {
     text-align: center;
@@ -88,8 +116,39 @@ input[type="submit"]:active {
     margin-top: 30px;   
 }
 
+/*---------------FOOTER--------------*/
 
+.footer {
 
-a:link { font-weight:bold; color: #e6e6e6; text-decoration:none; }
-a:visited { font-weight:bold; color: #e6e6e6; text-decoration:none; }
-a:hover { font-weight:bold; color: #B0AB40; text-decoration:none; }
+    width:50%;
+    margin: 5px auto;
+    padding-top: 30px;
+    display: block;
+    font-size: .7em 
+    font-weight:800;
+    text-align: center;
+    line-height: 100%
+
+}
+.footer p{
+    margin:10px 0px;
+}
+.footer a {
+    text-decoration: underline;
+}
+
+/*---------------RESULT--------------*/
+
+.result {
+   text-align: center;
+   width: 170px;  
+   margin: 15px 15px;
+}
+.result li {
+    display: block;
+    float: left;
+    margin: 15px;
+
+    font-weight: 400;
+    font-size: 2em!important;
+}
