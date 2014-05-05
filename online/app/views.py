@@ -12,8 +12,21 @@ def home():
 	form = Input()
 	if form.validate_on_submit():
 		wrong_input = False
-		if int(form.pw_length.data) <=3:
-			flash("It is not possible to create a password unter 4 letters!")
+		numbers = True
+		try:
+			int(form.pw_length.data)
+		except ValueError:
+			flash("You have to enter a number")
+			numbers = False
+		try:
+			int(form.pw_count.data)
+		except ValueError:
+			flash("You have to enter a number")
+			numbers = False
+		if numbers == False:
+			return redirect('/')
+		if int(form.pw_length.data) <=4:
+			flash("It is not possible to create a password unter 5 letters!")
 			wrong_input = True
 		if int(form.pw_length.data) >20:
 			flash("It is not possible to create a password over 20 letters!")

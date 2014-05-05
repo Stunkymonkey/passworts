@@ -16,22 +16,15 @@
 	<input type="submit" value="Generate" size=50px>
 	</ul>
 
-	{% for error in form.errors.pw_length %}
-		<span style="color: red;">[{{error}}]</span>
-	{% endfor %}<br>
-	{% for error in form.errors.pw_count %}
-		<span style="color: red;">[{{error}}]</span>
-	{% endfor %}<br>
-
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
-	    <h5>
+	    <h4>
 	      <ul class=flashes>
 	      {% for message in messages %}
 	        <li>{{ message }}</li>
 	      {% endfor %}
 	     </ul>
-	    </h5>
+	    </h4>
 	  {% endif %}
 	{% endwith %}
 
