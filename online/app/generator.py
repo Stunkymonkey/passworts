@@ -47,8 +47,8 @@ def makeup(counts, n):
 def generate(pw_lenght, pw_count):
 
     #print ("reading...")
-    dict_path = os.path.abspath(".") + "\\app\\dict\\"
-
+    dict_path = os.path.abspath(".") + "//app//dict//"
+    print dict_path
     try:
         text = set(open( dict_path + "text.txt", 'r').read().split())
     except FileNotFoundError:
