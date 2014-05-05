@@ -5,27 +5,12 @@
     {% else %}
     <title>Password-Generator</title>
     {% endif %}
-
-    <style type="text/css">
-        a:link { font-weight:bold; color: #e6e6e6; text-decoration:none; }
-        a:visited { font-weight:bold; color: #e6e6e6; text-decoration:none; }
-        a:hover { font-weight:bold; color: #B0AB40; text-decoration:none; }
-        body {
-            background-color: #131c35;
-            color: #e6e6e6;
-        }
-        .wrapper {
-            width:80%;
-            margin: 0px auto;
-            margin-top: 50px;
-            text-align: center;
-        }
-    </style>
-
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,700,300' rel='stylesheet' type='text/css'>
   </head>
   <body>
-    <div><a href="/index">Home</a> <a href="/impressum">Impressum</a></div>
-    <div class="wrapper">
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
   </body>
 </html>

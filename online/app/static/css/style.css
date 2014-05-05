@@ -1,0 +1,95 @@
+
+body {
+    background-color: #FAFAFA;
+    color: #0A0E14;
+
+    padding: 0px;
+    margin:0px;
+
+    font-family: "Raleway","Helvetiva Neue","Arial";
+}
+
+.header {
+    width: 50%;
+    margin: 0px auto;
+    display: block;
+
+}
+.header h1 {
+    text-align: center;
+    font-weight: 300;
+    font-size: 3em;
+    margin: 10px;
+}
+.header h1 i {
+    font-size: 3em;
+    margin-top: 20px;
+}
+.header h2 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 1.2em;
+}
+.content {
+    width: 50%;
+    margin: 0px auto;
+    display: block;
+    padding-top: 30px;
+
+}
+
+input {
+    width: 200px;
+    padding: 10px;
+
+    border-radius: 5px; 
+    border-width: 2px;
+    border-style: solid;
+    border-color:rgba( 0 , 0 , 50 ,.3); 
+
+    font-family: "Helvetiva Neue","Arial";
+    font-size: 1em;
+    margin: 5px 10px;
+    outline:none;
+
+}
+input:focus     {
+    border-color:rgba( 0 , 0 , 50 ,.6); 
+}
+
+input[type="submit"] {
+    background-color: #0A0E14;
+    color:#FAFAFA;
+    font-family: "Raleway","Helvetiva Neue","Arial";
+    opacity: .85;
+
+}
+input[type="submit"]:hover {
+    opacity: .8;
+
+} 
+input[type="submit"]:active {
+        opacity: .75;
+
+} 
+
+
+.centeredList
+ {
+    text-align: center;
+    list-style: none;
+    padding: 0px!important;
+ }
+
+ .centeredList li {
+    display: inline;    
+ }
+.submit {
+    margin-top: 30px;   
+}
+
+
+
+a:link { font-weight:bold; color: #e6e6e6; text-decoration:none; }
+a:visited { font-weight:bold; color: #e6e6e6; text-decoration:none; }
+a:hover { font-weight:bold; color: #B0AB40; text-decoration:none; }

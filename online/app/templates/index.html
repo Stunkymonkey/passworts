@@ -3,21 +3,32 @@
 
 {% block content %}
 
-<h1>Welcome to the Password-Generator</h1>
-<br>
+<div class="header">
+	<h1><i class="fa fa-unlock-alt"></i></h1>
+	<h1>Passworts</h1>
+	<h2>Smart passwords, easy to keep in mind</h2>
+</div>
+
+
+<div class="content">
 <form action="" method="POST" name="request">
 	{{form.hidden_tag()}}
-	{{form.pw_length(placeholder="lenght")}}
-	{{form.pw_count(placeholder="count")}}
-	<br>
-	<br>
-	<p><input type="submit" value="Generieren" size=50px></p>
+	<ul class="centeredList">
+	<li>{{form.pw_length(placeholder="Length")}}</li>
+	<li>{{form.pw_count(placeholder="Count of passwords")}}</li>
+	</ul>
+
+	<ul class="centeredList submit">
+	<input type="submit" value="Generate" size=50px>
+	</ul>
+
 	{% for error in form.errors.pw_lenght %}
 		<span style="color: red;">[{{error}}]</span>
 	{% endfor %}<br>
 	{% for error in form.errors.pw_coount %}
 		<span style="color: red;">[{{error}}]</span>
 	{% endfor %}<br>
-</form>
 
+</form>
+</div>	
 {% endblock %}
