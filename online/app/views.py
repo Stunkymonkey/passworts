@@ -11,21 +11,27 @@ def index():
 def home():
 	form = Input()
 	if form.validate_on_submit():
+		wrong_input = False
 		if int(form.pw_length.data) <=3:
 			flash("It is not possible to create a password unter 4 letters!")
+			wrong_input = True
 		if int(form.pw_length.data) >20:
 			flash("It is not possible to create a password over 20 letters!")
+			wrong_input = True
 		if int(form.pw_count.data) <=0:
 			flash("It is not possible to create no passwords!")
+			wrong_input = True
 		if int(form.pw_count.data) >100:
 			flash("It is not possible to create more than 100 passwords!")
+			wrong_input = True
+		if wrong_input == True:
+			return redirect('/')
 		else:
 			global requested
 			requested = 'Here are your '+str(form.pw_count.data)+' passwords:'
 			global password_ready
 			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
 			return redirect('/result')
-		return redirect('/')
 	return render_template('index.html', title = 'Home', form = form)
 
 @app.route('/result', methods = ['GET', 'POST'])
