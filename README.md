@@ -10,3 +10,5 @@ In May 2015 we started bringing the python script to the web. Therefore we use F
 	+ flask integration
 + CookingRobot
 	+ frontend design
+
+huge thanks to Thomas Waldmann
