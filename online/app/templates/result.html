@@ -2,22 +2,42 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Result:</h1>
-<br>
-<h2>
-  {% if requested %}
+
+<a class="backLink" href="/"><i class="fa fa-caret-left"></i> Back</a>
+
+
+<div class="content">
+
+
+
+  <!--<p class="output">{% if requested %}
     {{requested}}
   {% endif %}
-</h2>
-<h3>
-  <ul class=result>
+  </p>-->
+
+  <ul class="centeredList">
+
     {% for password in password_ready %}
-      <li>{{ password }}</li>
+      <input class="result" type="text" value="{{ password }}" readonly>
     {% else %}
+  </ul>
       <li><em>Sorry. It was to hard to generate the Passwords.</em></li>
     {% endfor %}
-  </ul>
-</h3>
+
+
+</div>  
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- for future flashes, if needed 
 {% with messages = get_flashed_messages() %}
