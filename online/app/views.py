@@ -4,20 +4,28 @@ from app.forms import Input
 from app import generator
 
 
-@app.route('/')
-def home():
-	return redirect('/index')
-@app.route('/index', methods = ['GET', 'POST'])
+@app.route('/index')
 def index():
+	return redirect('/')
+@app.route('/', methods = ['GET', 'POST'])
+def home():
 	form = Input()
 	if form.validate_on_submit():
-		global requested
-		requested = 'Here are your '+str(form.pw_count.data)+' passwords:'
-
-		#requested = 'You passwords are ' + str(form.pw_length.data) + ' letters long,' +'and you are getting ' + str(form.pw_count.data) + ' passwords.'
-		global password_ready
-		password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
-		return redirect('/result')
+		if int(form.pw_length.data) <=3:
+			flash("It is not possible to create a password unter 4 letters!")
+		if int(form.pw_length.data) >20:
+			flash("It is not possible to create a password over 20 letters!")
+		if int(form.pw_count.data) <=0:
+			flash("It is not possible to create no passwords!")
+		if int(form.pw_count.data) >100:
+			flash("It is not possible to create more than 100 passwords!")
+		else:
+			global requested
+			requested = 'Here are your '+str(form.pw_count.data)+' passwords:'
+			global password_ready
+			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
+			return redirect('/result')
+		return redirect('/')
 	return render_template('index.html', title = 'Home', form = form)
 
 @app.route('/result', methods = ['GET', 'POST'])
