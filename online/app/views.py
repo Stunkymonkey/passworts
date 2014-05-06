@@ -37,8 +37,6 @@ def home():
 			flash("It is not possible to create more than 50 passwords!")
 			return redirect('/')
 		else:
-			global requested
-			requested = 'Here are your '+str(form.pw_count.data)+' passwords:'
 			global password_ready
 			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
 			return redirect('/result')
@@ -46,7 +44,7 @@ def home():
 
 @app.route('/result', methods = ['GET', 'POST'])
 def result():
-	return render_template('result.html', title = 'Result', password_ready = password_ready, requested = requested)
+	return render_template('result.html', title = 'Result', password_ready = password_ready)
 
 @app.route('/impressum')
 def impressum():
