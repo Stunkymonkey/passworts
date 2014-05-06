@@ -18,12 +18,9 @@
   <ul class="centeredList">
 
     {% for password in password_ready %}
-      <input class="result" type="text" value="{{ password }}" readonly>
-        <i class="fa fa-clipboard clipIcon"></i>
-    {% else %}
-  </ul>
-      <li><em>Sorry. It was to hard to generate the Passwords.</em></li>
+      <input class="result" type="text" value="{{ password }}" readonly onclick="console.log('COPIED')">
     {% endfor %}
+  </ul>
 
 
 </div>  
