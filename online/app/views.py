@@ -36,7 +36,7 @@ def home():
 			return redirect('/')
 		else:
 			global requested
-			#requested = 'Here are your '+str(form.pw_count.data)+' passwords:'
+			requested = 'Here are your '+str(form.pw_count.data)+' passwords:'
 			global password_ready
 			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
 			return redirect('/result')

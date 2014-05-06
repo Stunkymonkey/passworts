@@ -9,29 +9,31 @@ body {
     font-family: "Raleway","Helvetiva Neue","Arial";
 }
 
+a {
+    text-decoration:none;
+    color: #0A0E14;
+}
+
 .backLink {
     background-color: #0A0E14;
     color:#FAFAFA;
     font-family: "Raleway","Helvetiva Neue","Arial";
     opacity: .85;
-    padding: 7px 10px;
     border-radius: 3px; 
 
     position: absolute;
-    top:20px;
-    left:20px;
-
+    top:15px;
+    left:15px;
+    padding: 7px 10px;
 }
+
 .backLink i{
     margin-right: 5px;
 }
 
 /*---------------MAIN--------------*/
 
-a {
-    text-decoration:none;
-    color: #0A0E14;
-}
+
 
 .header {
     width: 70%;
@@ -162,7 +164,6 @@ input[type="submit"]:active {
 #error   {
     background: #FF2D55;
     text-align: center;
-    //width: 70%;
     padding: 5px 30px;
     color: #FFF;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.5);

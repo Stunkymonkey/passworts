@@ -8,8 +8,8 @@
 <form action="" method="POST" name="request">
 	{{form.hidden_tag()}}
 	<ul class="centeredList">
-	<li>{{form.pw_length(placeholder="Length")}}</li>
-	<li>{{form.pw_count(placeholder="Count of passwords")}}</li>
+	<li>{{form.pw_length(placeholder="Length (5-16)")}}</li>
+	<li>{{form.pw_count(placeholder="Passwords (1-50)")}}</li>
 	</ul>
 
 	<ul class="centeredList submit">
@@ -32,7 +32,7 @@
 				});	
 				$('#error').trigger('openModal');
 	       	</script>
-	       	
+
 	      {% endfor %}
 	  {% endif %}
 	{% endwith %}
