@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from flask import render_template, flash, redirect, request
 from app import app
 from app.forms import Input
