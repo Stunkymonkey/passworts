@@ -18,7 +18,7 @@
   <ul class="centeredList">
 
     {% for password in password_ready %}
-      <input class="result" type="text" value="{{ password }}" readonly onclick="console.log('COPIED')">
+      <input class="result" type="text" value="{{ password }}" readonly onclick="this.select();">
     {% endfor %}
   </ul>
 
