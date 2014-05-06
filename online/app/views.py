@@ -11,33 +11,27 @@ def index():
 def home():
 	form = Input()
 	if form.validate_on_submit():
-		wrong_input = False
-		numbers = True
 		try:
 			int(form.pw_length.data)
 		except ValueError:
 			flash("You have to enter a number")
-			numbers = False
+			return redirect('/')
 		try:
 			int(form.pw_count.data)
 		except ValueError:
 			flash("You have to enter a number")
-			numbers = False
-		if numbers == False:
 			return redirect('/')
 		if int(form.pw_length.data) <=4:
 			flash("It is not possible to create a password unter 5 letters!")
-			wrong_input = True
+			return redirect('/')
 		if int(form.pw_length.data) >16:
 			flash("It is not possible to create a password over 16 letters!")
-			wrong_input = True
+			return redirect('/')
 		if int(form.pw_count.data) <=0:
 			flash("It is not possible to create no passwords!")
-			wrong_input = True
+			return redirect('/')
 		if int(form.pw_count.data) >50:
 			flash("It is not possible to create more than 50 passwords!")
-			wrong_input = True
-		if wrong_input == True:
 			return redirect('/')
 		else:
 			global requested
