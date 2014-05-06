@@ -11,7 +11,7 @@ def home():
 	form = Input()
 	return render_template('index.html', title = 'Home', form = form)
 
-@app.route('/result', methods = ['GET', 'POST'])
+@app.route('/result', methods = ['POST'])
 def result():
 	form = Input()
 	if form.validate_on_submit():
@@ -40,8 +40,14 @@ def result():
 		else:
 			global password_ready
 			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
-			return redirect('/result')
-	return render_template('result.html', title = 'Result', password_ready = password_ready)
+			#return redirect('/result')
+			return render_template('result.html', title = 'Result', password_ready = password_ready)
+
+@app.route('/result', methods = ['GET'])
+def result2():	
+	return redirect('/')
+
+
 
 @app.route('/impressum')
 def impressum():
