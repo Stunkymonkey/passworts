@@ -5,7 +5,6 @@ from app import app
 from app.forms import Input
 from app import generator
 
-
 @app.route('/', methods = ['GET', 'POST'])
 def home():
 	form = Input()
@@ -15,6 +14,7 @@ def home():
 def result():
 	form = Input()
 	if form.validate_on_submit():
+		cancel = False
 		try:
 			int(form.pw_length.data)
 		except ValueError:
@@ -47,7 +47,10 @@ def result():
 def result2():	
 	return redirect('/')
 
-
+@app.route('/cancel', methods = [ 'GET', 'POST'])
+def cancel():
+	generator.stop()
+	return redirect('/')
 
 @app.route('/impressum')
 def impressum():

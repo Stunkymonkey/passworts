@@ -5,6 +5,7 @@ import os.path
 from collections import defaultdict
 
 n = 3
+cancel = False
 
 def analyse(counts, text, n):
     #analyse text with n chars markov state, update the counts
@@ -44,6 +45,9 @@ def makeup(counts, n):
         text.append(next)
     return ''.join(text)[:-n]
 
+def stop():
+	cancel = True
+
 def generate(pw_lenght, pw_count):
 
     #print ("reading...")
@@ -75,7 +79,9 @@ def generate(pw_lenght, pw_count):
     for i in range(500000):
         madeup_word = makeup(counts, n).lower()
         #break
-        if madeup_word not in words.lower() and len(madeup_word) == pw_lenght and madeup_word.isalpha():
+        if cancel == True:
+        	return
+        elif madeup_word not in words.lower() and len(madeup_word) == pw_lenght and madeup_word.isalpha():
             print (madeup_word)
             finish_passwords.append(madeup_word)
             words_done += 1
