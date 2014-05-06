@@ -34,7 +34,7 @@ a {
 }
 
 .header {
-    width: 50%;
+    width: 70%;
     margin: 0px auto;
     display: block;
 
@@ -124,7 +124,7 @@ input[type="submit"]:active {
 
 .footer {
 
-    width:50%;
+    width:70%;
     margin: 5px auto;
     padding-top: 30px;
     display: block;
@@ -155,4 +155,16 @@ input[type="submit"]:active {
 
     font-weight: 400;
     font-size: 2em!important;
+}
+
+/*------------------Overlay---------------------*/
+
+#error   {
+    background: #FF2D55;
+    text-align: center;
+    //width: 70%;
+    padding: 5px 30px;
+    color: #FFF;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    font-weight: 600;
 }

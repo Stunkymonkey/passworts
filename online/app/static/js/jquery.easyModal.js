@@ -2,7 +2,7 @@
 * easyModal.js v1.3.1
 * A minimal jQuery modal that works with your CSS.
 * Author: Flavius Matis - http://flaviusmatis.github.com/
-* URL: https://github.com/flaviusmatis/easyModal.js
+* URL: querystring.encode(obj, sep, eq, name);
 */
 
 /*jslint browser: true*/

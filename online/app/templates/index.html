@@ -13,20 +13,31 @@
 	</ul>
 
 	<ul class="centeredList submit">
-	<input type="submit" value="Generate" size=50px>
+	<input type="submit" value="Generate" id="submit" size=50px>	
 	</ul>
+
+
 
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
-	    <h4>
-	      <ul class=flashes>
 	      {% for message in messages %}
-	        <li>{{ message }}</li>
+	       	<div id="error">
+			<p>{{ message }}</p>
+			</div>
+
+			<script type="text/javascript">
+				$('#error').easyModal({
+					top: 150,
+					overlay : 0.2
+				});	
+				$('#error').trigger('openModal');
+	       	</script>
+	       	
 	      {% endfor %}
-	     </ul>
-	    </h4>
 	  {% endif %}
 	{% endwith %}
+
+
 
 </form>
 </div>	
