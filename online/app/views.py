@@ -6,12 +6,13 @@ from app.forms import Input
 from app import generator
 
 
-
-@app.route('/index')
-def index():
-	return redirect('/')
 @app.route('/', methods = ['GET', 'POST'])
 def home():
+	form = Input()
+	return render_template('index.html', title = 'Home', form = form)
+
+@app.route('/result', methods = ['GET', 'POST'])
+def result():
 	form = Input()
 	if form.validate_on_submit():
 		try:
@@ -40,10 +41,6 @@ def home():
 			global password_ready
 			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
 			return redirect('/result')
-	return render_template('index.html', title = 'Home', form = form)
-
-@app.route('/result', methods = ['GET', 'POST'])
-def result():
 	return render_template('result.html', title = 'Result', password_ready = password_ready)
 
 @app.route('/impressum')
