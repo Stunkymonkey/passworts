@@ -8,7 +8,7 @@ In May 2014 we started bringing the python script to the web. Therefore we use F
 + Stunkymonkey
 	+ main Python script
 	+ flask integration
-+ CookingRobot
++ <a href="http://cookingrobot.de">CookingRobot</a>
 	+ frontend design
 
 huge thanks to Thomas Waldmann
