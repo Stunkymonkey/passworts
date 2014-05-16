@@ -50,6 +50,7 @@ def result2():
 @app.route('/cancel', methods = [ 'GET', 'POST'])
 def cancel():
 	generator.stop()
+	flash("The generation was canceled!")
 	return redirect('/')
 
 @app.route('/impressum')
