@@ -53,9 +53,6 @@ def cancel():
 	flash("The generation was canceled!")
 	return redirect('/')
 
-@app.route('/impressum')
-def impressum():
-	return render_template('impressum.html', title = 'Impressum')
 @app.errorhandler(404)
 def page_not_found(e):
 	return render_template('404.html', title = 'Error')
