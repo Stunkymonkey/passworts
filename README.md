@@ -9,6 +9,6 @@ In May 2014 we started bringing the python script to the web. Therefore we use F
 	+ main Python script
 	+ flask integration
 + <a href="http://cookingrobot.de">CookingRobot</a>
-	+ frontend design
+	+ front end design
 
 huge thanks to Thomas Waldmann
