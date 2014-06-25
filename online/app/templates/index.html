@@ -5,7 +5,10 @@
 
 
 <div class="content">
-<form action="/result" method="POST" name="request">
+
+
+
+<form action="/result" method="POST" id="request">
 	{{form.hidden_tag()}}
 	<ul class="centeredList">
 	<li>{{form.pw_length(placeholder="Length (5-16)")}}</li>
@@ -13,8 +16,20 @@
 	</ul>
 
 	<ul class="centeredList submit">
-	<input type="submit" value="Generate" id="submit" size=50px>	
+		<input type="submit" value="Generate" id="submit" size="50px">
+		<!--	<button  id="submit" class="ladda-button submit-button " data-style="expand-right">
+				<span class="ladda-label">Generate</span>
+			</button>
+			<script>
+			Ladda.bind( '.ladda-button' );
+			</script>
+		-->
 	</ul>
+
+
+
+
+
 
 
 
@@ -40,6 +55,11 @@
 
 
 </form>
+
+
+
+
+
 </div>	
 
   <div class="footer">

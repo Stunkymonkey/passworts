@@ -7,6 +7,7 @@ body {
     margin:0px;
 
     font-family: "Raleway","Helvetiva Neue","Arial";
+    min-width: 320px;
 }
 
 a {
@@ -15,6 +16,14 @@ a {
 }
 
 .backLink {
+    display: none;
+}
+
+
+@media only screen and (min-width: 450px) {
+
+.backLink {
+    display: block;
     background-color: #0A0E14;
     color:#FAFAFA;
     font-family: "Raleway","Helvetiva Neue","Arial";
@@ -30,6 +39,13 @@ a {
 .backLink i{
     margin-right: 5px;
 }
+
+
+
+}
+
+
+
 
 /*---------------MAIN--------------*/
 
@@ -58,7 +74,7 @@ a {
 }
 
 .content {
-    width: 50%;
+    max-width: 350px;
     margin: 0px auto;
     display: block;
     padding-top: 30px;
@@ -164,8 +180,9 @@ input[type="submit"]:active {
 #error   {
     background: #FF2D55;
     text-align: center;
-    padding: 5px 30px;
+    padding: 5px 20px;
     color: #FFF;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     font-weight: 600;
+    width: 200px;
 }
