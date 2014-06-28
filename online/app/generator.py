@@ -78,7 +78,7 @@ def generate(pw_lenght, pw_count):
     #print ("calculating...")
     counts = compute_prob(counts)
 
-    print ("generating...")
+    #print ("generating...")
     words_done = 0
     finish_passwords = []
     for i in range(500000):
