@@ -7,20 +7,21 @@ from collections import defaultdict
 n = 3
 cancel = False
 
+
 def analyse(counts, text, n):
-    #analyse text with n chars markov state, update the counts
-    
+    # analyse text with n chars markov state, update the counts
+
     text = '^' * n + text + '$' * n
     for i in range(len(text) - n):
-        st = i, text[i:i+n]
-        next = text[i+n]
+        st = i, text[i:i + n]
+        next = text[i + n]
         counts[st][next] += 1
     return counts
 
 
 def compute_prob(counts):
-    #compute ranges in [0 .. 1) from the counts
-    
+    # compute ranges in [0 .. 1) from the counts
+
     for c1 in counts:
         total = float(sum(counts[c1][c2] for c2 in counts[c1]))
         base = 0.0
@@ -30,9 +31,10 @@ def compute_prob(counts):
             counts[c1][c2] = base
     return counts
 
+
 def makeup(counts, n):
-    #make up a word using the markov model of the original text
-    
+    # make up a word using the markov model of the original text
+
     st = 0, '^' * n
     text = []
     while st[1] != '$' * n:
@@ -45,24 +47,30 @@ def makeup(counts, n):
         text.append(next)
     return ''.join(text)[:-n]
 
+
 def stop():
-	cancel = True
+    cancel = True
+
 
 def text_import(dict_path):
     try:
-        text = set(open( dict_path + "text.txt", 'r').read().split())
+        with open(dict_path + "text.txt", "r") as f:
+            text = set(f.read().split())
     except FileNotFoundError:
-        print ("The dict/text.txt file was not found.")
-        #return ("The dict/text.txt file was not found.")
+        print("The dict/text.txt file was not found.")
+        # return ("The dict/text.txt file was not found.")
     return text
+
 
 def words_import(dict_path):
     try:
-        words = open( dict_path + "words.txt", 'r').read()
+        with open(dict_path + "words.txt", "r") as f:
+            words = f.read()
     except FileNotFoundError:
-        print ("The dict/words.txt file was not found.")
-        #return ("The dict/words.txt file was not found.")
+        print("The dict/words.txt file was not found.")
+        # return ("The dict/words.txt file was not found.")
     return words
+
 
 def generate(pw_lenght, pw_count):
     #print ("reading...")
@@ -83,11 +91,11 @@ def generate(pw_lenght, pw_count):
     finish_passwords = []
     for i in range(500000):
         madeup_word = makeup(counts, n).lower()
-        #break
+        # break
         if cancel == True:
-        	return
+            return
         elif madeup_word not in words.lower() and len(madeup_word) == pw_lenght and madeup_word.isalpha():
-            print (madeup_word)
+            print(madeup_word)
             finish_passwords.append(madeup_word)
             words_done += 1
         #print ("           " + str(i+1) + "-crap:       " + madeup_word)
