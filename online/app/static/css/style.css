@@ -22,11 +22,6 @@ hr {
 }
 
 .backLink {
-    display: none;
-}
-@media only screen and (min-width: 450px) {
-
-.backLink {
     display: block;
     background-color: #0A0E14;
     color:#FAFAFA;
@@ -43,11 +38,6 @@ hr {
 .backLink i{
     margin-right: 5px;
 }
-
-
-
-}
-
 
 
 
@@ -78,7 +68,8 @@ hr {
 }
 
 .content {
-    max-width: 350px;
+    max-width: 60%;
+    min-width: 300px;
     margin: 0px auto;
     display: block;
     padding-top: 30px;
@@ -188,5 +179,18 @@ input[type="submit"]:active {
     color: #FFF;
     box-shadow: 1px 1px 3px rgba(0,0,0,0.5);
     font-weight: 600;
+    width: 400px;
+}
+
+@media only screen and (max-width: 450px) {
+
+.backLink {
+    display: none;
+}
+
+#error {
     width: 200px;
+}
+
+
 }
