@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 
-from app.forms import Input
+from flask import flash
 
-#form = Input()
-
-def check():
+def check(form):
+	input_correct = True
 	try:
 		int(form.pw_length.data)
 	except ValueError:
@@ -15,7 +14,7 @@ def check():
 	except ValueError:
 		flash("You have to enter a number")
 		input_correct = False
-	print (input_correct)
+	#print ("input_correct")
 	if input_correct == False:
 		return input_correct
 	else:

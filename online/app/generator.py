@@ -48,22 +48,27 @@ def makeup(counts, n):
 def stop():
 	cancel = True
 
-def generate(pw_lenght, pw_count):
-
-    #print ("reading...")
-    dict_path = os.path.join(os.path.abspath(".") + r"/app/dict/")
-    #print (dict_path)
+def text_import(dict_path):
     try:
         text = set(open( dict_path + "text.txt", 'r').read().split())
     except FileNotFoundError:
         print ("The dict/text.txt file was not found.")
-        return ("The dict/text.txt file was not found.")
+        #return ("The dict/text.txt file was not found.")
+    return text
+
+def words_import(dict_path):
     try:
         words = open( dict_path + "words.txt", 'r').read()
     except FileNotFoundError:
         print ("The dict/words.txt file was not found.")
-        return ("The dict/words.txt file was not found.")
+        #return ("The dict/words.txt file was not found.")
+    return words
 
+def generate(pw_lenght, pw_count):
+    #print ("reading...")
+    dict_path = os.path.join(os.path.abspath(".") + r"/app/dict/")
+    text = text_import(dict_path)
+    words = words_import(dict_path)
     #print ("analysing text...")
     counts = defaultdict(lambda: defaultdict(int))
 
