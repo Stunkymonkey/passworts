@@ -16,13 +16,13 @@ def result():
 	form = Input()
 	if form.validate_on_submit():
 		cancel = False
-		if input.check(form) == False:
-			return redirect('/')	
-		else:
+		if input.check(form) == True:
 			global password_ready
 			password_ready = (generator.generate(int(form.pw_length.data), int(form.pw_count.data)))
 			#return redirect('/result')
 			return render_template('result.html', title = 'Result', password_ready = password_ready)
+		else:
+			return redirect('/')
 
 @app.route('/result', methods = ['GET'])
 def result2():	
