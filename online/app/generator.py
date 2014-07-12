@@ -72,7 +72,7 @@ def words_import(dict_path):
     return words
 
 
-def generate(pw_lenght, pw_count):
+def generate(pw_lenght, pw_count, random):
     #print ("reading...")
     dict_path = os.path.join(os.path.abspath(".") + r"/app/dict/")
     text = text_import(dict_path)
@@ -92,12 +92,14 @@ def generate(pw_lenght, pw_count):
     for i in range(500000):
         madeup_word = makeup(counts, n).lower()
         # break
-        if cancel == True:
-            return
-        elif madeup_word not in words.lower() and len(madeup_word) == pw_lenght and madeup_word.isalpha():
-            print(madeup_word)
+        if madeup_word not in words.lower() and madeup_word.isalpha() and random == False and len(madeup_word) == pw_lenght:
+            # print(madeup_word)
+            finish_passwords.append(madeup_word)
+            words_done += 1
+        elif madeup_word not in words.lower() and madeup_word.isalpha() and random == True:
+            # print(madeup_word)
             finish_passwords.append(madeup_word)
             words_done += 1
         #print ("           " + str(i+1) + "-crap:       " + madeup_word)
-        elif words_done == int(pw_count):
+        if words_done == int(pw_count):
             return(finish_passwords)
