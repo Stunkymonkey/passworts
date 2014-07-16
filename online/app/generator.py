@@ -40,6 +40,7 @@ def makeup(counts, n):
     while st[1] != '$' * n:
         d = counts[st]
         r = random.random()
+        # TODO RNG test here
         for next in d:
             if d[next] > r:
                 break

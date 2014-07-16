@@ -9,4 +9,4 @@ class Input(Form):
     pw_length = TextField('pw_length')
     pw_count = TextField('pw_count')
     random = BooleanField('random', default=False)
-    #process_data = random
+    #process_data = process

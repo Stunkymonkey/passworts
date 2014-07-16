@@ -22,7 +22,7 @@ def result():
         if random == False:
             pw_length = int(form.pw_length.data)
         else:
-            pw_length = 0
+            pw_length = 1
         pw_count = int(form.pw_count.data)
         if input.check(form) == True:
             global password_ready
