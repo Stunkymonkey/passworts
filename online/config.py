@@ -1,3 +1,5 @@
+import os
+
 CSRF_ENABLED = True
-SECRET_KEY = 'deine-mudda-stinkt-hart-nach-fisch'
+SECRET_KEY = str(os.urandom(24))
 APPNAME = "Passworts"
