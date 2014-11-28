@@ -2,10 +2,10 @@
 
 import random
 import os.path
+#import pickle, copy_reg
 from collections import defaultdict
 
 n = 3
-cancel = False
 
 
 def analyse(counts, text, n):
@@ -49,10 +49,6 @@ def makeup(counts, n):
     return ''.join(text)[:-n]
 
 
-def stop():
-    cancel = True
-
-
 def text_import(dict_path):
     try:
         with open(dict_path + "text.txt", "r") as f:
@@ -87,17 +83,20 @@ def generate(pw_lenght, pw_count, random):
     #print ("calculating...")
     counts = compute_prob(counts)
 
+    #with open(dict_path + 'text.pickle', 'wb') as handle:
+    #    pickle.dumps(counts, handle)
+
     #print ("generating...")
     words_done = 0
     finish_passwords = []
     for i in range(500000):
         madeup_word = makeup(counts, n).lower()
         # break
-        if madeup_word not in words.lower() and madeup_word.isalpha() and random == False and len(madeup_word) == pw_lenght:
+        if (madeup_word not in words.lower() and madeup_word.isalpha() and random == False and len(madeup_word) == pw_lenght):
             # print(madeup_word)
             finish_passwords.append(madeup_word)
             words_done += 1
-        elif madeup_word not in words.lower() and madeup_word.isalpha() and random == True:
+        elif (madeup_word not in words.lower() and madeup_word.isalpha() and random == True):
             # print(madeup_word)
             finish_passwords.append(madeup_word)
             words_done += 1

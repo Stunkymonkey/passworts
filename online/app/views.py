@@ -17,7 +17,6 @@ def home():
 def result():
     form = Input()
     if form.validate_on_submit():
-        cancel = False
         random = form.random.data
         if random == False:
             pw_length = int(form.pw_length.data)
@@ -40,8 +39,7 @@ def result2():
 
 @app.route('/cancel', methods=['GET', 'POST'])
 def cancel():
-    generator.stop()
-    flash("The generation was canceled!")
+    flash("The generation sould be canceled (unsure)!")
     return redirect('/')
 
 
