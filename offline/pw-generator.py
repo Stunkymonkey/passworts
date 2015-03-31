@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 analysing and generation of texts using markov models
 
@@ -5,7 +6,8 @@ analysing and generation of texts using markov models
 
 """
 
-print("Welcome to Password-Generator\nwritten by Felix Buehler and Thomas Waldmann")
+print(
+    "Welcome to Password-Generator\nwritten by Felix Buehler and Thomas Waldmann")
 
 import random
 import os.path
@@ -18,12 +20,14 @@ n = 3
 
 
 def exit_prog():
-    raw_input("\nPress Enter to quit: ")
+    input("\nPress Enter to quit: ")
     sys.exit()
+
 
 def restart_program():
     python = sys.executable
     os.execl(python, python, * sys.argv)
+
 
 def analyse(counts, text, n):
     """
@@ -31,8 +35,8 @@ def analyse(counts, text, n):
     """
     text = '^' * n + text + '$' * n
     for i in range(len(text) - n):
-        st = i, text[i:i+n]
-        next = text[i+n]
+        st = i, text[i:i + n]
+        next = text[i + n]
         counts[st][next] += 1
     return counts
 
@@ -67,29 +71,31 @@ def makeup(counts, n):
         text.append(next)
     return ''.join(text)[:-n]
 
+
 def password_count(count):
     while True:         # you really want that many passwords improve
         while True:
             try:
-                count = int(raw_input("How much passwords do you want? "))
+                count = int(input("How much passwords do you want? "))
                 break
             except ValueError:
                 print ("You have to enter a number")
         if count >= 1:
-                if count <= 200:
-                    return count
-                else:
-                    x = 0
-                    while x == 0:
-                        many_passwords = raw_input("You really want that many passwords? (y/n) ")
-                        if many_passwords.lower().strip() in "y yes".split():
-                            x = 1
-                            return count
-                        elif many_passwords.lower().strip() in "n no".split():
-                            x = 2
-                        else:
-                            print ("You have to enter yes or no!")
-                            continue
+            if count <= 200:
+                return count
+            else:
+                x = 0
+                while x == 0:
+                    many_passwords = input(
+                        "You really want that many passwords? (y/n) ")
+                    if many_passwords.lower().strip() in "y yes".split():
+                        x = 1
+                        return count
+                    elif many_passwords.lower().strip() in "n no".split():
+                        x = 2
+                    else:
+                        print ("You have to enter yes or no!")
+                        continue
         else:
             print ("You don't want to have no password")
 
@@ -101,7 +107,7 @@ def password_lenght(lenght):
             plural = "passwords"
         while True:
             try:
-                lenght = int(raw_input("How long should your " + plural + " be? "))
+                lenght = int(input("How long should your " + plural + " be? "))
                 break
             except ValueError:
                 print ("You have to enter a number")
@@ -113,7 +119,8 @@ def password_lenght(lenght):
                 if plural == "password":
                     plural = "a password"
                 while x == 0:
-                    long_passwords = raw_input("You really want " + plural + " that long? (hard to generate) (y/n) ")
+                    long_passwords = input(
+                        "You really want " + plural + " that long? (hard to generate) (y/n) ")
                     if long_passwords.lower().strip() in "y yes".split():
                         x = 1
                     elif long_passwords.lower().strip() in "n no".split():
@@ -126,11 +133,13 @@ def password_lenght(lenght):
                 else:
                     continue
         else:
-            print ("You don't want to have a password with less than four letters, because it is very insecure.")
+            print (
+                "You don't want to have a password with less than four letters, because it is very insecure.")
+
 
 def text_import(dict_path):
     try:
-        with open(dict_path + "text.txt", "r") as f:
+        with open(dict_path + "text.txt", "r", encoding="ISO-8859-1") as f:
             text = set(f.read().split())
     except FileNotFoundError:
         print("The dict/text.txt file was not found.")
@@ -140,7 +149,7 @@ def text_import(dict_path):
 
 def words_import(dict_path):
     try:
-        with open(dict_path + "words.txt", "r") as f:
+        with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
             words = f.read()
     except FileNotFoundError:
         print("The dict/words.txt file was not found.")
@@ -176,9 +185,11 @@ for i in range(5000000):
         break
 else:
     if words_done == 0:
-        go_on = raw_input("\nIt took too long to generate!!!\n(in 5 million generations there were no matches)\nTry it one more time with other settings.\nYou want to run the programm again? (y/n)")
+        go_on = input(
+            "\nIt took too long to generate!!!\n(in 5 million generations there were no matches)\nTry it one more time with other settings.\nYou want to run the programm again? (y/n)")
     elif words_done <= pw_count:
-        go_on = raw_input("It was not possible to generate " + str(pw_count) + " passwords, because it took to long.\nYou want to run the programm again? (y/n)")
+        go_on = input("It was not possible to generate " + str(pw_count) +
+                      " passwords, because it took to long.\nYou want to run the programm again? (y/n)")
     if go_on.lower().strip() in "y yes".split():
         restart_program()
 exit_prog()
