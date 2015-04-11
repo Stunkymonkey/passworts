@@ -53,7 +53,7 @@ def text_import(dict_path):
     try:
         with open(dict_path + "text.txt", "r") as f:
             text = set(f.read().split())
-    except FileNotFoundError:
+    except (FileNotFoundError):
         print("The dict/text.txt file was not found.")
         # return ("The dict/text.txt file was not found.")
     return text
@@ -63,30 +63,30 @@ def words_import(dict_path):
     try:
         with open(dict_path + "words.txt", "r") as f:
             words = f.read()
-    except FileNotFoundError:
+    except (FileNotFoundError):
         print("The dict/words.txt file was not found.")
         # return ("The dict/words.txt file was not found.")
     return words
 
 
 def generate(pw_lenght, pw_count, random):
-    #print ("reading...")
-    dict_path = os.path.join(os.path.abspath(".") + r"/app/dict/")
+    # print ("reading...")
+    dict_path = os.path.join(os.path.abspath(".") + r"/dict/")
     text = text_import(dict_path)
     words = words_import(dict_path)
-    #print ("analysing text...")
+    # print ("analysing text...")
     counts = defaultdict(lambda: defaultdict(int))
 
     for word in text:
         counts = analyse(counts, word, n)
 
-    #print ("calculating...")
+    # print ("calculating...")
     counts = compute_prob(counts)
 
-    #with open(dict_path + 'text.pickle', 'wb') as handle:
+    # with open(dict_path + 'text.pickle', 'wb') as handle:
     #    pickle.dumps(counts, handle)
 
-    #print ("generating...")
+    # print ("generating...")
     words_done = 0
     finish_passwords = []
     for i in range(500000):

@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 
-from flask import render_template, flash, redirect
-from app import app
-from app.forms import Input
-from app import generator
-from app import input
+from flask import Flask,render_template, flash, redirect
+#from app import app
+from forms import Input
+import generator
+import input
 
+app = Flask('passworts')
+app.config.from_object('config')
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -46,3 +48,6 @@ def cancel():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title='Error')
+
+if __name__ == '__main__':
+    app.run()
