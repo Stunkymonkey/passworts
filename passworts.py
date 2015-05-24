@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
-from flask import Flask,render_template, flash, redirect
-#from app import app
+from flask import Flask, render_template, flash, redirect, Response, stream_with_context
 from forms import Input
 import generator
 import input
 
 app = Flask('passworts')
 app.config.from_object('config')
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -17,21 +17,29 @@ def home():
 
 @app.route('/result', methods=['POST'])
 def result():
+    def stream_pw():
+        yield (render_template('result.html', title='Result'))
+        yield ('<ul class="centeredList">\n')
+        for i in range(pw_count):
+            curr_pw = generator.generate(pw_length, random)
+            # print (curr_pw)
+            yield ('<input class="result" type="text" value=%s readonly onclick="this.select();">\n' % curr_pw)
+        yield ('</ul>\n')
+        # print ("Finished")
     form = Input()
     if form.validate_on_submit():
-        random = form.random.data
-        if random == False:
-            pw_length = int(form.pw_length.data)
-        else:
-            pw_length = 1
-        pw_count = int(form.pw_count.data)
         if input.check(form) == True:
-            global password_ready
-            password_ready = (generator.generate(pw_length, pw_count, random))
-            # return redirect('/result')
-            return render_template('result.html', title='Result', password_ready=password_ready)
+            random = form.random.data
+            if bool(random) == False:
+                pw_length = int(form.pw_length.data)
+            else:
+                pw_length = 0
+            pw_count = int(form.pw_count.data)
+            return Response(stream_with_context(stream_pw()))
         else:
             return redirect('/')
+    else:
+        return redirect('/')
 
 
 @app.route('/result', methods=['GET'])

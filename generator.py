@@ -2,8 +2,9 @@
 
 import random
 import os.path
-#import pickle, copy_reg
 from collections import defaultdict
+
+# import pickle
 
 n = 3
 
@@ -69,37 +70,56 @@ def words_import(dict_path):
     return words
 
 
-def generate(pw_lenght, pw_count, random):
+"""
+def text_import(dict_path):
+    try:
+        with open(dict_path + "filename.pickle", "rb") as handle:
+            counts = pickle.load(handle)
+    except (FileNotFoundError):
+        print("The dict/text.txt file was not found.")
+        # return ("The dict/text.txt file was not found.")
+    return counts
+
+
+def words_import(dict_path):
+    try:
+        with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
+            words = f.read()
+    except (FileNotFoundError):
+        print("The dict/words.txt file was not found.")
+        # return ("The dict/words.txt file was not found.")
+    return words
+"""
+
+
+def generate(pw_lenght, random):
     # print ("reading...")
     dict_path = os.path.join(os.path.abspath(".") + r"/dict/")
+    # print (counts)
     text = text_import(dict_path)
     words = words_import(dict_path)
+
     # print ("analysing text...")
     counts = defaultdict(lambda: defaultdict(int))
 
     for word in text:
         counts = analyse(counts, word, n)
-
     # print ("calculating...")
     counts = compute_prob(counts)
 
-    # with open(dict_path + 'text.pickle', 'wb') as handle:
-    #    pickle.dumps(counts, handle)
-
     # print ("generating...")
-    words_done = 0
-    finish_passwords = []
     for i in range(500000):
         madeup_word = makeup(counts, n).lower()
         # break
-        if (madeup_word not in words.lower() and madeup_word.isalpha() and random == False and len(madeup_word) == pw_lenght):
-            # print(madeup_word)
-            finish_passwords.append(madeup_word)
-            words_done += 1
-        elif (madeup_word not in words.lower() and madeup_word.isalpha() and random == True):
-            # print(madeup_word)
-            finish_passwords.append(madeup_word)
-            words_done += 1
-        #print ("           " + str(i+1) + "-crap:       " + madeup_word)
-        if words_done == int(pw_count):
-            return(finish_passwords)
+        if (madeup_word not in words.lower() and madeup_word.isalpha() and
+                bool(random) == False and len(madeup_word) == pw_lenght):
+            return madeup_word
+        elif (madeup_word not in words.lower() and madeup_word.isalpha() and
+              bool(random) == True):
+            return madeup_word
+        # print ("           " + str(i+1) + "-crap:       " + madeup_word)
+    print ("Sorry this one took to long")
+    return ("Sorry this one took to long")
+
+if __name__ == '__main__':
+    generate(8, False)
