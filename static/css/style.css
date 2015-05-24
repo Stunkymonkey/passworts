@@ -32,7 +32,7 @@ hr {
     position: absolute;
     top:15px;
     left:15px;
-    padding: 7px 10px;
+    padding: 10px 15px;
 }
 
 .backLink i{
@@ -116,8 +116,60 @@ input[type="submit"]:hover {
 } 
 input[type="submit"]:active {
         opacity: .75;
-
 } 
+input[type=checkbox] {
+    display: none;
+}
+label {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    padding-left:28px;
+    font-size: 15px;
+    line-height: 20px;
+}
+label:before {
+    content: "";
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+    position: absolute;
+    left: 0;
+    bottom: 1px;
+    background-color: none;
+    border-radius: 5px; 
+    border:rgba( 0 , 0 , 50 ,.3) 2px solid; 
+}
+input[type=checkbox]:checked + label:before {
+    content: "\2713";
+    font-size: 15px;
+    color: rgba( 0 , 0 , 50 ,.6);
+    text-align: center;
+    line-height: 16px;
+    border-color:rgba( 0 , 0 , 50 ,.6); 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .centeredList
  {
