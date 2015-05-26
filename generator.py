@@ -122,4 +122,5 @@ def generate(pw_lenght, random):
     return ("Sorry this one took to long")
 
 if __name__ == '__main__':
-    generate(8, False)
+    for i in range(20):
+        print (generate(8, False))

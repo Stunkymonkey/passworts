@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, flash, redirect, Response, stream_with_context
+from flask import Flask, render_template, flash, redirect
+from flask import Response, stream_with_context
 from forms import Input
 import generator
 import input
@@ -19,11 +20,11 @@ def home():
 def result():
     def stream_pw():
         yield (render_template('result.html', title='Result'))
-        yield ('<ul class="centeredList">\n')
+        yield ('\n<ul class="centeredList">\n')
         for i in range(pw_count):
             curr_pw = generator.generate(pw_length, random)
-            # print (curr_pw)
-            yield ('<input class="result" type="text" value=%s readonly onclick="this.select();">\n' % curr_pw)
+            print (curr_pw)
+            yield ('  <input class="result" type="text" value=%s readonly onclick="this.select();">\n' % curr_pw)
         yield ('</ul>\n')
         # print ("Finished")
     form = Input()
