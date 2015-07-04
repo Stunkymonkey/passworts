@@ -52,7 +52,7 @@ def makeup(counts, n):
 
 def text_import(dict_path):
     try:
-        with open(dict_path + "text.txt", "r") as f:
+        with open(dict_path + "text.txt", "r", encoding="ISO-8859-1") as f:
             text = set(f.read().split())
     except (FileNotFoundError):
         print("The dict/text.txt file was not found.")
@@ -62,7 +62,7 @@ def text_import(dict_path):
 
 def words_import(dict_path):
     try:
-        with open(dict_path + "words.txt", "r") as f:
+        with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
             words = f.read()
     except (FileNotFoundError):
         print("The dict/words.txt file was not found.")
@@ -122,4 +122,5 @@ def generate(pw_lenght, random):
     return ("Sorry this one took to long")
 
 if __name__ == '__main__':
-    generate(8, False)
+    for i in range(20):
+        print (generate(8, False))

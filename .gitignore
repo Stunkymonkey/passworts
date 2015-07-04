@@ -1,1 +1,6 @@
 __pycache__/
+*.tox
+*.egg-info
+*.pyc
+*.pyo
+*.so
