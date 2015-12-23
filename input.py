@@ -2,6 +2,11 @@
 
 from flask import flash
 
+"""
+top: -((8)/(40-1))x+(16+(8)/(40-1))
+bottom: ((8-5)/40)x+(5-((8-5)/40))
+"""
+
 
 def check(form):
     input_correct = False

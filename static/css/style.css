@@ -156,21 +156,6 @@ input[type=checkbox]:checked + label:before {
     border-color:rgba( 0 , 0 , 50 ,.6); 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .centeredList
  {
     text-align: center;

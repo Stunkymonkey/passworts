@@ -23,13 +23,13 @@ def result():
         yield ('\n<ul class="centeredList">\n')
         for i in range(pw_count):
             curr_pw = generator.generate(pw_length, random)
-            print (curr_pw)
+            # print (curr_pw)
             yield ('  <input class="result" type="text" value=%s readonly onclick="this.select();">\n' % curr_pw)
         yield ('</ul>\n')
         # print ("Finished")
     form = Input()
     if form.validate_on_submit():
-        if input.check(form) == True:
+        if input.check(form):
             random = form.random.data
             if bool(random) == False:
                 pw_length = int(form.pw_length.data)
