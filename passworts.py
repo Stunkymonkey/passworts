@@ -31,7 +31,7 @@ def result():
     if form.validate_on_submit():
         if input.check(form):
             random = form.random.data
-            if bool(random) == False:
+            if not bool(random):
                 pw_length = int(form.pw_length.data)
             else:
                 pw_length = 0
