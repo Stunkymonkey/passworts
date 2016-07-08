@@ -54,9 +54,8 @@ def text_import(dict_path):
     try:
         with open(dict_path + "text.txt", "r", encoding="ISO-8859-1") as f:
             text = set(f.read().split())
-    except (FileNotFoundError):
-        print("The dict/text.txt file was not found.")
-        # return ("The dict/text.txt file was not found.")
+    except FileNotFoundError as e:
+        raise SystemExit("Could not open text file: " + str(e))
     return text
 """
 
@@ -65,9 +64,8 @@ def text_import(dict_path, source):
     try:
         with open(dict_path + source + ".dill", "rb") as handle:
             counts = dill.load(handle)
-    except (FileNotFoundError):
-        print("The dict/text.txt file was not found.")
-        # return ("The dict/text.txt file was not found.")
+    except FileNotFoundError as e:
+        raise SystemExit("Could not open text file: " + str(e))
     return counts
 
 
@@ -75,9 +73,8 @@ def words_import(dict_path):
     try:
         with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
             words = f.read()
-    except (FileNotFoundError):
-        print("The dict/words.txt file was not found.")
-        # return ("The dict/words.txt file was not found.")
+    except FileNotFoundError as e:
+        raise SystemExit("Could not open words file: " + str(e))
     return words
 
 
