@@ -10,8 +10,8 @@ bottom: ((8-5)/40)x+(5-((8-5)/40))
 
 def check(form):
     input_correct = False
-    while input_correct == False:
-        if form.random.data == False:
+    while input_correct is False:
+        if form.random.data is False:
             try:
                 int(form.pw_length.data)
             except ValueError:

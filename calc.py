@@ -2,14 +2,13 @@
 
 import os.path
 from collections import defaultdict
-
 import pickle
 
 n = 3
 
 
 def analyse(counts, text, n):
-    # analyse text with n chars markov state, update the counts
+    """analyse text with n chars markov state, update the counts"""
 
     text = '^' * n + text + '$' * n
     for i in range(len(text) - n):
@@ -20,7 +19,7 @@ def analyse(counts, text, n):
 
 
 def compute_prob(counts):
-    # compute ranges in [0 .. 1) from the counts
+    """compute ranges in [0 .. 1) of the given words"""
 
     for c1 in counts:
         total = float(sum(counts[c1][c2] for c2 in counts[c1]))
@@ -32,11 +31,11 @@ def compute_prob(counts):
     return counts
 
 
-def text_import(dict_path):
-    # import text to analyse
+def text_import(dict_path, source):
+    """reads a file to analyse"""
 
     try:
-        with open(dict_path + "text.txt", "r", encoding="ISO-8859-1") as f:
+        with open(dict_path + source, "r", encoding="ISO-8859-1") as f:
             text = set(f.read().split())
     except (FileNotFoundError):
         print("The dict/text.txt file was not found.")
@@ -44,28 +43,41 @@ def text_import(dict_path):
     return text
 
 
-def calculate():
-    print ("reading...")
+def dd():
+    return defaultdict(int)
+
+
+def calculate(source):
+    print("reading...")
     dict_path = os.path.join(os.path.abspath(".") + r"/dict/")
-    text = text_import(dict_path)
-    print ("analysing text...")
-    counts = defaultdict(lambda: defaultdict(int))
+    text = text_import(dict_path, source)
+    source = source.split(".")[0]
+    print("analysing text...")
+    counts = defaultdict(dd)
 
     for word in text:
         counts = analyse(counts, word, n)
 
-    print ("calculating...")
-    print (type(counts))
+    print("calculating...")
     counts = compute_prob(counts)
 
-    print (type(counts))
-    # print (counts)
+    # print(type(counts))
+    # print(counts)
 
     # save to file
+    print("write...")
+    with open((dict_path + source + '.pickle'), 'wb') as handle:
+        pickle.dump(counts, handle)
 
-    with open((dict_path + 'filename.pickle'), 'wb') as handle:
-        pickle.dump(dict(counts), handle)
-    print ("finish")
+    print("checking file...")
+    with open((dict_path + source + '.pickle'), 'rb') as handle:
+        written = pickle.load(handle)
+
+    if written == counts:
+        print("Calucation was sucessfull")
+    else:
+        print("Something went wrong")
+
 
 if __name__ == '__main__':
-    calculate()
+    calculate("text.txt")
