@@ -3,6 +3,8 @@
 import os.path
 from collections import defaultdict
 import pickle
+from optparse import OptionParser
+import sys
 
 n = 3
 
@@ -76,7 +78,13 @@ def calculate(source):
         print("Calucation was sucessfull")
     else:
         print("Something went wrong")
+        sys.exit(1)
 
 
 if __name__ == '__main__':
-    calculate("text.txt")
+    parser = OptionParser()
+    parser.add_option("-f", "--file", type="string", dest="filename",
+                      help="Name of the input file")
+    (options, args) = parser.parse_args()
+
+    calculate(options.filename)
