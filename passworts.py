@@ -6,6 +6,17 @@ from forms import Input
 import generator
 import input
 
+"""
+these lines are required, because pickle does not store the data type
+https://stackoverflow.com/questions/27732354/unable-to-load-files-using-pickle-and-multipile-modules
+"""
+from collections import defaultdict
+
+
+def dd():
+    return defaultdict(int)
+
+
 app = Flask('passworts')
 app.config.from_object('config')
 
@@ -22,10 +33,11 @@ def result():
         yield (render_template('result.html', title='Result'))
         yield ('\n<ul class="centeredList">\n')
         for i in range(pw_count):
-            curr_pw = generator.generate(pw_length, random)
+            curr_pw = generator.generate(pw_length, random, "text.txt")
             # print (curr_pw)
             yield ('  <input class="result" type="text" value=%s readonly onclick="this.select();">\n' % curr_pw)
         yield ('</ul>\n')
+        yield ('</div>\n')
         # print ("Finished")
     form = Input()
     if form.validate_on_submit():
