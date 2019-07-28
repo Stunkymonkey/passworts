@@ -5,10 +5,10 @@ Passworts is a password generator written in Python. It is using the marokov mod
 In May 2014 we started bringing the python script to the web. Therefore we use Flask, a Python web framework.
 
 ### Contributors
-+ <a href="http://stunkymonkey.de" target="_blank">Stunkymonkey</a>
++ <a href="https://stunkymonkey.de" target="_blank">Stunkymonkey</a>
 	+ main Python script
 	+ flask integration
-+ <a href="http://cookingrobot.de" target="_blank">CookingRobot</a>
++ <a href="https://weise.io/" target="_blank">Friedrich Weise</a>
 	+ front end design
 
-huge thanks to Thomas Waldmann for writing the generation part
+huge thanks to @ThomasWaldmann for writing the generation part
