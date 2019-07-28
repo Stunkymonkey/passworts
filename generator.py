@@ -32,7 +32,7 @@ def text_import(dict_path, source):
     try:
         with open(dict_path + source + ".pickle", "rb") as handle:
             counts = pickle.load(handle)
-    except FileNotFoundError as e:
+    except OSError as e:
         raise SystemExit("Could not open text file: " + str(e))
     return counts
 
@@ -41,7 +41,7 @@ def words_import(dict_path):
     try:
         with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
             words = f.read()
-    except FileNotFoundError as e:
+    except OSError as e:
         raise SystemExit("Could not open words file: " + str(e))
     return words
 
