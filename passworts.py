@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, flash, redirect
-from flask import Response, stream_with_context
+from flask import Flask, render_template, flash, redirect, Response, stream_with_context
 from forms import Input
 import generator
 import input
