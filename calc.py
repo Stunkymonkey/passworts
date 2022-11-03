@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 
-import os.path
+from pathlib import Path
 from collections import defaultdict
 import pickle
-from optparse import OptionParser
+from argparse import ArgumentParser
 import sys
 
 n = 3
+
+
+def dd():
+    return defaultdict(int)
 
 
 def analyse(counts, text, n):
@@ -33,26 +37,20 @@ def compute_prob(counts):
     return counts
 
 
-def text_import(dict_path, source):
+def text_import(text_path):
     """reads a file to analyse"""
 
     try:
-        with open(dict_path + source, "r", encoding="ISO-8859-1") as f:
-            text = set(f.read().split())
-    except FileNotFoundError as e:
+        with open(text_path, "r", encoding="ISO-8859-1") as handle:
+            text = set(handle.read().split())
+    except OSError as e:
         raise SystemExit("Could not open text file: " + str(e)) from e
     return text
 
 
-def dd():
-    return defaultdict(int)
-
-
-def calculate(source):
+def calculate(text_path):
     print("reading...")
-    dict_path = os.path.join(os.path.abspath(".") + r"/dict/")
-    text = text_import(dict_path, source)
-    source = source.split(".")[0]
+    text = text_import(text_path)
     print("analysing text...")
     counts = defaultdict(dd)
 
@@ -62,16 +60,13 @@ def calculate(source):
     print("calculating...")
     counts = compute_prob(counts)
 
-    # print(type(counts))
-    # print(counts)
-
     # save to file
     print("write...")
-    with open((dict_path + source + ".pickle"), "wb") as handle:
+    with open(text_path.with_suffix('.pkl'), "wb") as handle:
         pickle.dump(counts, handle)
 
     print("checking file...")
-    with open((dict_path + source + ".pickle"), "rb") as handle:
+    with open(text_path.with_suffix('.pkl'), "rb") as handle:
         written = pickle.load(handle)
 
     if written == counts:
@@ -82,10 +77,10 @@ def calculate(source):
 
 
 if __name__ == "__main__":
-    parser = OptionParser()
-    parser.add_option(
-        "-f", "--file", type="string", dest="filename", help="Name of the input file"
+    parser = ArgumentParser()
+    parser.add_argument(
+        "-f", "--file", type=Path, dest="filename", help="Name of the input file"
     )
-    (options, args) = parser.parse_args()
+    args = parser.parse_args()
 
-    calculate(options.filename)
+    calculate(args.filename)

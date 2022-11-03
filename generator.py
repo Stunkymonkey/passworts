@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import random
-import os.path
+from pathlib import Path
 from collections import defaultdict
 import pickle
-from optparse import OptionParser
+from argparse import ArgumentParser
 
 import calc
 
@@ -26,18 +26,20 @@ def makeup(counts, n):
     return "".join(text)[:-n]
 
 
-def text_import(dict_path, source):
+def text_import(text_path):
+    """reads a file to analyse"""
+
     try:
-        with open(dict_path + source + ".pickle", "rb") as handle:
+        with open(text_path, "rb") as handle:
             counts = pickle.load(handle)
     except OSError as e:
         raise SystemExit("Could not open text file: " + str(e)) from e
     return counts
 
 
-def words_import(dict_path):
+def words_import(words_path):
     try:
-        with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
+        with open(words_path, "r", encoding="ISO-8859-1") as f:
             words = f.read()
     except OSError as e:
         raise SystemExit("Could not open words file: " + str(e)) from e
@@ -50,16 +52,15 @@ def dd():
 
 def generate(pw_lenght, random_lenght, source):
     # print ("reading...")
-    source = source.split(".")[0]
-    dict_path = os.path.join(os.path.abspath(".") + r"/dict/")
-    words = words_import(dict_path)
+    dict_path = Path(source)
+    words = words_import(Path("./dict/words.txt"))
 
-    if os.path.isfile(dict_path + source + ".pickle"):
-        counts = text_import(dict_path, source)
+    if dict_path.with_suffix('.pkl').exists():
+        counts = text_import(dict_path.with_suffix('.pkl'))
     else:
-        calc.calculate(source + ".txt")
+        calc.calculate(dict_path)
         counts = defaultdict(dd)
-        counts = text_import(dict_path, source)
+        counts = text_import(dict_path.with_suffix('.pkl'))
 
     # print ("generating...")
     for _ in range(50000):
@@ -76,34 +77,31 @@ def generate(pw_lenght, random_lenght, source):
 
 
 if __name__ == "__main__":
-    parser = OptionParser()
-    parser.add_option(
+    parser = ArgumentParser()
+    parser.add_argument(
         "-f",
         "--file",
-        type="string",
+        type=Path,
         dest="filename",
-        help="Name of the input file",
-        default="text.txt",
+        help="path of the input file",
+        default=Path(__file__).absolute().parent / "dict" / "text.txt",
     )
-    parser.add_option(
+    parser.add_argument(
         "-l",
         "--lenght",
-        type="int",
-        dest="lenght",
+        type=int,
         help="lenght of the password",
         default=8,
     )
-    parser.add_option(
+    parser.add_argument(
         "-a",
         "--amount",
-        type="int",
-        dest="amount",
+        type=int,
         help="amount of the passwords",
         default=1,
     )
 
-    parser.disable_interspersed_args()
-    (options, args) = parser.parse_args()
+    args = parser.parse_args()
 
-    for i in range(options.amount):
-        print(generate(options.lenght, False, str(options.filename)))
+    for i in range(args.amount):
+        print(generate(args.lenght, False, str(args.filename)))

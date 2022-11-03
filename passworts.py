@@ -33,7 +33,7 @@ def result():
         yield render_template("result.html", title="Result")
         yield '\n<ul class="centeredList">\n'
         for _i in range(pw_count):
-            curr_pw = generator.generate(pw_length, random, "text.txt")
+            curr_pw = generator.generate(pw_length, random, "./dict/text.txt")
             # print (curr_pw)
             yield (
                 f'<input class="result" type="text" value={curr_pw} readonly onclick="this.select();">\n'
