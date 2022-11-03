@@ -1,3 +1,7 @@
+# generated
+*.pkl
+
+# python
 __pycache__/
 .idea/
 *.tox

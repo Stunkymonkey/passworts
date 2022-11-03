@@ -1964,7 +1964,7 @@ Anders
 Andersdenkende
 Andeutungen
 Andorra
-Andr‚
+Andrâ€š
 Andraengen
 Andrang
 Andranges
@@ -3486,7 +3486,7 @@ Atomwissenschaftler
 Atomzeitalter
 Atomzeitalters
 Atomzerstruemmerung
-Attach‚
+Attachâ€š
 Attache
 Attacke
 Attacken
@@ -9640,7 +9640,7 @@ Bypass
 Byte
 Byzantiner
 Bzw
-C‚zanne
+Câ€šzanne
 C-Dur
 CA
 CAD
@@ -9735,7 +9735,7 @@ Cents
 Cervantes
 Cervelatwurst
 Ceylon
-Chƒteau
+ChÆ’teau
 Cha-Cha-Cha
 Cha-cha-cha
 Chaiselongue
@@ -10111,7 +10111,7 @@ Concertino
 Concord
 Concorde
 Concurrent-CP/M-86
-Conf‚rencier
+Confâ€šrencier
 Conferencier
 Container
 Contergan
@@ -15272,7 +15272,7 @@ FT
 Fabel
 Fabeln
 Fabelpferd
-Faberg‚
+Fabergâ€š
 Fabian
 Fabrik
 Fabrikanlagen
@@ -33106,7 +33106,7 @@ Kuwait
 Kybernetiker
 Kybernetikers
 Kyoto
-L‚vi-Strauss
+Lâ€švi-Strauss
 LAN
 LDP
 LH
@@ -44576,7 +44576,7 @@ Rezessionskurs
 Rezessionsmodell
 Rezessionsrisiko
 Rezessionswolken
-Rh“netal
+Rhâ€œnetal
 Rhabarber
 Rhapsodie
 Rheinbund
@@ -117801,7 +117801,7 @@ ovulationshemmenden
 oxidiert
 oympische
 ozeanographischer
-pòange
+pÃ²ange
 paar
 paaren
 paarmal
