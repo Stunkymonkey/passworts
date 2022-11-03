@@ -12,20 +12,18 @@ n = 3
 
 
 def makeup(counts, n):
-    # make up a word using the markov model of the original text
-
-    st = 0, '^' * n
+    """make up a word using the markov model of the original text"""
+    st = 0, "^" * n
     text = []
-    while st[1] != '$' * n:
+    while st[1] != "$" * n:
         d = counts[st]
         r = random.random()
-        # TODO RNG test here
-        for next in d:
-            if d[next] > r:
+        for next_char in d:
+            if d[next_char] > r:
                 break
-        st = st[0] + 1, st[1][1:] + next
-        text.append(next)
-    return ''.join(text)[:-n]
+        st = st[0] + 1, st[1][1:] + next_char
+        text.append(next_char)
+    return "".join(text)[:-n]
 
 
 def text_import(dict_path, source):
@@ -33,7 +31,7 @@ def text_import(dict_path, source):
         with open(dict_path + source + ".pickle", "rb") as handle:
             counts = pickle.load(handle)
     except OSError as e:
-        raise SystemExit("Could not open text file: " + str(e))
+        raise SystemExit("Could not open text file: " + str(e)) from e
     return counts
 
 
@@ -42,7 +40,7 @@ def words_import(dict_path):
         with open(dict_path + "words.txt", "r", encoding="ISO-8859-1") as f:
             words = f.read()
     except OSError as e:
-        raise SystemExit("Could not open words file: " + str(e))
+        raise SystemExit("Could not open words file: " + str(e)) from e
     return words
 
 
@@ -50,7 +48,7 @@ def dd():
     return defaultdict(int)
 
 
-def generate(pw_lenght, randomLenght, source):
+def generate(pw_lenght, random_lenght, source):
     # print ("reading...")
     source = source.split(".")[0]
     dict_path = os.path.join(os.path.abspath(".") + r"/dict/")
@@ -63,34 +61,46 @@ def generate(pw_lenght, randomLenght, source):
         counts = defaultdict(dd)
         counts = text_import(dict_path, source)
 
-    # print(counts)
-    # print(type(counts))
-
-    # print("counts")
-    # print(counts)
-
     # print ("generating...")
-    for i in range(50000):
+    for _ in range(50000):
         madeup_word = makeup(counts, n).lower()
         # break
-        if (madeup_word not in words.lower() and madeup_word.isalpha()):
-            if bool(randomLenght):
+        if madeup_word not in words.lower() and madeup_word.isalpha():
+            if bool(random_lenght):
                 return madeup_word
-            elif (not bool(randomLenght) and len(madeup_word) == pw_lenght):
+            if not bool(random_lenght) and len(madeup_word) == pw_lenght:
                 return madeup_word
         # print("           " + str(i + 1) + "-crap:       " + madeup_word)
     print("Sorry this one took to long")
-    return ("Sorry this one took to long")
+    return "Sorry this one took to long"
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = OptionParser()
-    parser.add_option("-f", "--file", type="string", dest="filename",
-                      help="Name of the input file", default="text.txt")
-    parser.add_option("-l", "--lenght", type="int", dest="lenght",
-                      help="lenght of the password", default=8)
-    parser.add_option("-a", "--amount", type="int", dest="amount",
-                      help="amount of the passwords", default=1)
+    parser.add_option(
+        "-f",
+        "--file",
+        type="string",
+        dest="filename",
+        help="Name of the input file",
+        default="text.txt",
+    )
+    parser.add_option(
+        "-l",
+        "--lenght",
+        type="int",
+        dest="lenght",
+        help="lenght of the password",
+        default=8,
+    )
+    parser.add_option(
+        "-a",
+        "--amount",
+        type="int",
+        dest="amount",
+        help="amount of the passwords",
+        default=1,
+    )
 
     parser.disable_interspersed_args()
     (options, args) = parser.parse_args()

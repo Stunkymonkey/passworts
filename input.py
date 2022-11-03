@@ -8,7 +8,7 @@ bottom: ((8-5)/40)x+(5-((8-5)/40))
 """
 
 
-def check(form):
+def input_check(form):
     input_correct = False
     while input_correct is False:
         if form.random.data is False:
@@ -18,12 +18,10 @@ def check(form):
                 flash("You have to enter a number")
                 break
             if int(form.pw_length.data) <= 4:
-                flash(
-                    "It is not possible to create a password unter 5 letters!")
+                flash("It is not possible to create a password unter 5 letters!")
                 break
-            elif int(form.pw_length.data) > 16:
-                flash(
-                    "It is not possible to create a password over 16 letters!")
+            if int(form.pw_length.data) > 16:
+                flash("It is not possible to create a password over 16 letters!")
                 break
         try:
             int(form.pw_count.data)
@@ -33,9 +31,8 @@ def check(form):
         if int(form.pw_count.data) <= 0:
             flash("It is not possible to create no passwords!")
             break
-        elif int(form.pw_count.data) > 50:
+        if int(form.pw_count.data) > 50:
             flash("It is not possible to create more than 50 passwords!")
             break
-        else:
-            input_correct = True
+        input_correct = True
     return input_correct

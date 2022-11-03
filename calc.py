@@ -12,11 +12,11 @@ n = 3
 def analyse(counts, text, n):
     """analyse text with n chars markov state, update the counts"""
 
-    text = '^' * n + text + '$' * n
+    text = "^" * n + text + "$" * n
     for i in range(len(text) - n):
-        st = i, text[i:i + n]
-        next = text[i + n]
-        counts[st][next] += 1
+        st = i, text[i : i + n]
+        next_char = text[i + n]
+        counts[st][next_char] += 1
     return counts
 
 
@@ -40,7 +40,7 @@ def text_import(dict_path, source):
         with open(dict_path + source, "r", encoding="ISO-8859-1") as f:
             text = set(f.read().split())
     except FileNotFoundError as e:
-        raise SystemExit("Could not open text file: " + str(e))
+        raise SystemExit("Could not open text file: " + str(e)) from e
     return text
 
 
@@ -67,11 +67,11 @@ def calculate(source):
 
     # save to file
     print("write...")
-    with open((dict_path + source + '.pickle'), 'wb') as handle:
+    with open((dict_path + source + ".pickle"), "wb") as handle:
         pickle.dump(counts, handle)
 
     print("checking file...")
-    with open((dict_path + source + '.pickle'), 'rb') as handle:
+    with open((dict_path + source + ".pickle"), "rb") as handle:
         written = pickle.load(handle)
 
     if written == counts:
@@ -81,10 +81,11 @@ def calculate(source):
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = OptionParser()
-    parser.add_option("-f", "--file", type="string", dest="filename",
-                      help="Name of the input file")
+    parser.add_option(
+        "-f", "--file", type="string", dest="filename", help="Name of the input file"
+    )
     (options, args) = parser.parse_args()
 
     calculate(options.filename)
