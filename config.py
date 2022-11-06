@@ -1,3 +1,6 @@
+""" flask config file
+"""
+
 import random
 import string
 
