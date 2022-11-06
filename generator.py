@@ -1,70 +1,71 @@
 #!/usr/bin/env python3
+""" passworts cli for generating passwords"""
+# import time
 
-import random
-from pathlib import Path
-from collections import defaultdict
 import pickle
+import random
+import bisect
 from argparse import ArgumentParser
+from collections import defaultdict
+from pathlib import Path
 
 import calc
+from calc import LOOKUP_RANGE
 
-n = 3
 
-
-def makeup(counts, n):
+def makeup(counts, lookup_lenght):
     """make up a word using the markov model of the original text"""
-    st = 0, "^" * n
+    previous_chars = 0, "^" * lookup_lenght
     text = []
-    while st[1] != "$" * n:
-        d = counts[st]
-        r = random.random()
-        for next_char in d:
-            if d[next_char] > r:
-                break
-        st = st[0] + 1, st[1][1:] + next_char
+    while previous_chars[1] != "$" * lookup_lenght:
+        possible_chars = counts[previous_chars]
+        random_char_propability = random.random()
+
+        # find key of dict with first value larger then propability
+        index = bisect.bisect(list(possible_chars.values()), random_char_propability)
+        next_char = list(possible_chars.keys())[index]
+
         text.append(next_char)
-    return "".join(text)[:-n]
+        previous_chars = previous_chars[0] + 1, previous_chars[1][1:] + next_char
+    return "".join(text)[:-lookup_lenght]
 
 
 def text_import(text_path):
     """reads a file to analyse"""
-
     try:
         with open(text_path, "rb") as handle:
             counts = pickle.load(handle)
-    except OSError as e:
-        raise SystemExit("Could not open text file: " + str(e)) from e
+    except OSError as error:
+        raise SystemExit("Could not open text file: " + str(error)) from error
     return counts
 
 
 def words_import(words_path):
+    """read words to prevent existing words"""
     try:
-        with open(words_path, "r", encoding="ISO-8859-1") as f:
-            words = f.read()
-    except OSError as e:
-        raise SystemExit("Could not open words file: " + str(e)) from e
+        with open(words_path, "r", encoding="utf-8") as word_file:
+            words = word_file.read()
+    except OSError as error:
+        raise SystemExit("Could not open words file: " + str(error)) from error
     return words
 
 
-def dd():
-    return defaultdict(int)
-
-
 def generate(pw_lenght, random_lenght, source):
+    """generate word with limitations"""
     # print ("reading...")
     dict_path = Path(source)
     words = words_import(Path("./dict/words.txt"))
 
-    if dict_path.with_suffix('.pkl').exists():
-        counts = text_import(dict_path.with_suffix('.pkl'))
+    if dict_path.with_suffix(".pkl").exists():
+        counts = text_import(dict_path.with_suffix(".pkl"))
     else:
         calc.calculate(dict_path)
-        counts = defaultdict(dd)
-        counts = text_import(dict_path.with_suffix('.pkl'))
+        counts = defaultdict(calc.integer_dict)
+        counts = text_import(dict_path.with_suffix(".pkl"))
 
     # print ("generating...")
     for _ in range(50000):
-        madeup_word = makeup(counts, n).lower()
+        madeup_word = makeup(counts, LOOKUP_RANGE).lower()
         # break
         if madeup_word not in words.lower() and madeup_word.isalpha():
             if bool(random_lenght):
