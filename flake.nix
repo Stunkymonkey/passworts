@@ -14,56 +14,38 @@
         "aarch64-linux"
       ];
 
+      flake = {
+        #nixosModules.passworts = import ./module.nix;
+
+        overlay = final: prev: {
+          passworts = self.packages.${prev.stdenv.hostPlatform.system}.passworts;
+        };
+        nixosModules.passworts = { pkgs, lib, config, ... }: {
+          imports = [ ./module.nix ];
+          nixpkgs.overlays = [ self.overlay ];
+        };
+      };
+
       perSystem =
         { pkgs
         , self'
         , ...
         }: {
-          packages = {
-
-            default = pkgs.stdenvNoCC.mkDerivation {
-              pname = "stunkymonkey-passworts";
-              version = builtins.substring 0 8 self.lastModifiedDate;
-              src = self;
-              nativeBuildInputs =
-                let
-                  python-with-my-packages = pkgs.python3.withPackages (ps: with ps; [
-                    flask
-                    flask_wtf
-
-                    # move to shell
-                    black
-                    pylint
-                    isort
-                  ]);
-                in
-                [
-                  python-with-my-packages
-                ];
-              buildPhase = ''
-                # generate stuff
-                runHook preBuild
-                mkdir -p $out
-                hugo --minify --destination $out
-                runHook postBuild
-              '';
-              dontInstall = true;
-              meta = with pkgs.lib; {
-                description = "My awesome homepage";
-                license = licenses.mit;
-                platforms = platforms.all;
-              };
-            };
-
+          packages = rec {
+            default = passworts;
+            passworts = pkgs.callPackage ./package.nix { inherit self; };
           };
 
           devShells.default = pkgs.mkShellNoCC {
-            packages = with pkgs; [
-              black
-            ];
             name = "home";
             inputsFrom = [
               self'.packages.default
+            ];
+            # development dependencies
+            packages = with pkgs; [
+              black
+              pylint
+              isort
             ];
           };
         };

@@ -9,3 +9,8 @@ __pycache__/
 *.pyc
 *.pyo
 *.so
+
+# nix
+.direnv
+.envrc
+result
