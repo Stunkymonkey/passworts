@@ -4,19 +4,13 @@
 import pickle
 import sys
 from argparse import ArgumentParser
-from collections import defaultdict
 from pathlib import Path
+from collections import defaultdict
+
+from preprocess_type import integer_dict
 
 # lookup range (lower more difficult to pronounce, higher easier)
 LOOKUP_RANGE = 3
-
-
-def integer_dict():
-    """
-    these lines are required, because pickle does not store the data type
-    https://stackoverflow.com/questions/27732354/unable-to-load-files-using-pickle-and-multipile-modules
-    """
-    return defaultdict(int)
 
 
 def analyse(counts, text, lookup_lenght):
@@ -54,7 +48,7 @@ def text_import(text_path):
     return text
 
 
-def calculate(text_path):
+def preprocess(text_path):
     """precalculate the propabilities"""
     print("reading...")
     text = text_import(text_path)
@@ -72,16 +66,6 @@ def calculate(text_path):
     with open(text_path.with_suffix(".pkl"), "wb") as handle:
         pickle.dump(counts, handle)
 
-    print("checking file...")
-    with open(text_path.with_suffix(".pkl"), "rb") as handle:
-        written = pickle.load(handle)
-
-    if written == counts:
-        print("Calucation was sucessfull")
-    else:
-        print("Something went wrong")
-        sys.exit(1)
-
 
 if __name__ == "__main__":
     parser = ArgumentParser()
@@ -90,4 +74,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    calculate(args.filename)
+    preprocess(args.filename)

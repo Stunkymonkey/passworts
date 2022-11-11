@@ -7,12 +7,17 @@ from wtforms import BooleanField, IntegerField
 from wtforms.validators import InputRequired
 
 import generator
+from preprocess_type import integer_dict  # pylint: disable=unused-import
+
+
+application = Flask("passworts")
+application.config.from_object("config")
 
 
 class Input(FlaskForm):
     """flask forms"""
 
-    pw_length = IntegerField("pw_length", validators=[InputRequired()])
+    pw_length = IntegerField("pw_length")
     pw_count = IntegerField("pw_count", validators=[InputRequired()])
     random_lenght = BooleanField("random", default=False)
 
@@ -48,18 +53,14 @@ def input_check(form):
     return input_correct
 
 
-app = Flask("passworts")
-app.config.from_object("config")
-
-
-@app.route("/", methods=["GET", "POST"])
+@application.route("/", methods=["GET", "POST"])
 def home():
     """index page"""
     form = Input()
     return render_template("index.html", title="Home", form=form)
 
 
-@app.route("/result", methods=["POST"])
+@application.route("/result", methods=["POST"])
 def result():
     """resulting page"""
 
@@ -67,7 +68,7 @@ def result():
         yield render_template("result.html", title="Result")
         yield '\n<ul class="centeredList">\n'
         for _i in range(pw_count):
-            curr_pw = generator.generate(pw_length, random_lenght, "./dict/text.txt")
+            curr_pw = generator.generate(pw_length, random_lenght)
             # print(curr_pw)
             yield (
                 f'<input class="result" type="text" value={curr_pw} readonly'
@@ -90,17 +91,17 @@ def result():
     return redirect("/")
 
 
-@app.route("/result", methods=["GET"])
+@application.route("/result", methods=["GET"])
 def result_get():
     """redirect get to results to index"""
     return redirect("/")
 
 
-@app.errorhandler(404)
+@application.errorhandler(404)
 def page_not_found(_error):
     """error page display"""
     return render_template("404.html", title="Error")
 
 
 if __name__ == "__main__":
-    app.run()
+    application.run()

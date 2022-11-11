@@ -9,8 +9,8 @@ from argparse import ArgumentParser
 from collections import defaultdict
 from pathlib import Path
 
-import calc
-from calc import LOOKUP_RANGE
+from calc import preprocess, LOOKUP_RANGE
+from preprocess_type import integer_dict
 
 
 def makeup(counts, lookup_lenght):
@@ -50,17 +50,21 @@ def words_import(words_path):
     return words
 
 
-def generate(pw_lenght, random_lenght, source):
+def generate(
+    pw_lenght,
+    random_lenght,
+    source=Path(__file__).absolute().parent / "dict" / "text.txt",
+):
     """generate word with limitations"""
     # print ("reading...")
     dict_path = Path(source)
-    words = words_import(Path("./dict/words.txt"))
+    words = words_import(Path(__file__).absolute().parent / "dict" / "words.txt")
 
     if dict_path.with_suffix(".pkl").exists():
         counts = text_import(dict_path.with_suffix(".pkl"))
     else:
-        calc.calculate(dict_path)
-        counts = defaultdict(calc.integer_dict)
+        preprocess(dict_path)
+        counts = defaultdict(integer_dict)
         counts = text_import(dict_path.with_suffix(".pkl"))
 
     # print ("generating...")
