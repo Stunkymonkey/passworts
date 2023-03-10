@@ -64,6 +64,7 @@ def home():
 def result():
     """resulting page"""
 
+    @stream_with_context
     def stream_pw():
         yield render_template("result.html", title="Result")
         yield '\n<ul class="centeredList">\n'
@@ -86,7 +87,8 @@ def result():
             else:
                 pw_length = 0
             pw_count = int(form.pw_count.data)
-            return Response(stream_with_context(stream_pw()))
+            # making sure with headers nginx does not cache anything
+            return Response(stream_pw(), headers={'X-Accel-Buffering': 'no', 'Cache-Control': 'no-cache'})
         return redirect("/")
     return redirect("/")
 
