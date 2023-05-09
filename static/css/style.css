@@ -174,11 +174,10 @@ input[type=checkbox]:checked + label:before {
     margin: 5px auto;
     padding-top: 30px;
     display: block;
-    font-size: .7em
-    font-weight:800;
+    font-size: .7em;
+    font-weight: 800;
     text-align: center;
     line-height: 180%
-
 }
 .footer p{
     margin:0px 0px;
