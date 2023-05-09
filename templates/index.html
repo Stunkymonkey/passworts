@@ -3,10 +3,7 @@
 
 {% block content %}
 
-
 <div class="content">
-
-
 <form action="/result" method="POST" id="request">
 	{{form.hidden_tag()}}
 	<ul class="centeredList">
@@ -20,12 +17,10 @@
 		<input type="submit" value="Generate" id="submit" size="50px">
 	</ul>
 
-
-
 	{% with messages = get_flashed_messages() %}
-	  {% if messages %}
-	      {% for message in messages %}
-	       	<div id="error">
+		{% if messages %}
+			{% for message in messages %}
+			<div id="error">
 			<p>{{ message }}</p>
 			</div>
 
@@ -33,25 +28,18 @@
 				$('#error').easyModal({
 					top: 150,
 					overlay : 0.2
-				});	
+				});
 				$('#error').trigger('openModal');
-	       	</script>
+			</script>
 
-	      {% endfor %}
-	  {% endif %}
+			{% endfor %}
+		{% endif %}
 	{% endwith %}
-
-
-
 </form>
-
-
-
-</div>	
-
-  <div class="footer">
-    <hr>
-    <p>Passworts is a project by <a href="https://github.com/Stunkymonkey/">Stunkymonkey</a> and <a href="https://weise.io/">Friedrich Weise</a></p>
-    <p>Its written in Python using <a href="http://flask.pocoo.org/">Flask</a>. Available at <a href="https://github.com/Stunkymonkey/passworts">Github</a></p>
-  </div>
+</div>
+<div class="footer">
+	<hr>
+	<p>Passworts is a project by <a href="https://github.com/Stunkymonkey/">Stunkymonkey</a> and <a href="https://weise.io/">Friedrich Weise</a></p>
+	<p>Its written in Python using <a href="http://flask.pocoo.org/">Flask</a>. Available at <a href="https://github.com/Stunkymonkey/passworts">Github</a></p>
+</div>
 {% endblock %}
