@@ -18,7 +18,7 @@ pkgs.python3Packages.buildPythonPackage {
 
     for f in ./dict/*.txt;
       # skip the words calculations, because they do not make much sense
-      do [[ "$f" != *"words"* ]] && ${python3.pythonForBuild.interpreter} calc.py -f "$f";
+      do [[ "$f" != *"words"* ]] && ${python3.pythonOnBuildForHost.interpreter} calc.py -f "$f";
     done
 
     mkdir -p $out/
