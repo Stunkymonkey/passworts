@@ -8,7 +8,7 @@ pkgs.python3Packages.buildPythonPackage {
 
   propagatedBuildInputs = with python3.pkgs; [
     flask
-    flask_wtf
+    flask-wtf
     gevent
     gunicorn
   ];
